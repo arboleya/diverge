@@ -1,8 +1,6 @@
 # Condilation
 
-Simple text preprocessor with general conditional compilation goodies.
-
-The best friend of your next hybrid builds.
+Dead simple conditional build tool for text files.
 
 - [Installation](#installation)
 - [Usage](#usage)
