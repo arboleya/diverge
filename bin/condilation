@@ -1,0 +1,78 @@
+#!/usr/bin/env node
+
+// modules
+var fs = require('fs');
+var path = require('path');
+var condilation = require('..');
+var program = require('commander');
+
+// cli interface
+program
+  .version(require('../package.json').version)
+  .usage('<input> <output>')
+  .arguments('[input] <output>')
+  .action(condilationize)
+  .option('-f, --force', 'forces overwrite of output file')
+  .on('--help', function(){
+    console.log('  Examples:');
+    console.log('');
+    console.log('    $     env=cjs condilation common.js cjs.js');
+    console.log('    $  env=meteor condilation common.js meteor.js');
+    console.log('    $ env=globals condilation common.js globals.js');
+    console.log('');
+  })
+  .parse(process.argv);
+
+// auto help
+if(!process.argv.slice(2).length){
+  program.help();
+}
+
+ // process user input
+function condilationize(input, output){
+  // validation of input
+  if(!input){
+    console.log('Input file not informed');
+    process.exit();
+  }
+
+  input = path.resolve(input);
+  if(!fs.existsSync(input)){
+    console.log('Input file path not found:\n\t', input);
+    process.exit();
+  }
+
+  output = path.resolve(output);
+  
+  if(fs.existsSync(output) && !program.force){
+    
+    var msg = 'Output file exists:\n\t:: ' + output;
+    msg += '\n\nDo you want to overwrite it? [N/y] : ';
+    
+    prompt(msg, function(answer){
+      if(/y|yes/i.test(answer))
+        action(input, output);
+      else 
+        process.exit();
+    });
+
+  } else
+    action(input, output);
+}
+
+// pronpt users for overwrite confirmation
+function prompt(question, done){
+  var stdin = process.stdin;
+  var stdout = process.stdout;
+  
+  stdout.write(question);
+  stdin.once( 'data', function(data){
+    done(data.toString().trim());
+  }).resume();
+}
+
+// conditional compile user file accordingly
+function action(input, output){
+  condilation(input, output, null, {force: program.force});
+  process.exit();
+}
