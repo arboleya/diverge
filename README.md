@@ -4,14 +4,11 @@ Dead simple conditional build tool for text files.
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Examples:](#examples)
-- [Directives](#directives)
-- [Comparison](#comparison)
-- [Instructions](#instructions)
-- [Compiling](#compiling)
-  - [#1 env=cjs](##1-envcjs)
-  - [#2 env=meteor](##2-envmeteor)
-  - [#3 env=meteor](##3-envmeteor)
+  - [Directives](#directives)
+  - [Comparison](#comparison)
+  - [Instrumenting](#instructions)
+  - [Compiling](#compiling)
+- [API](#programatic-api)
 
 # Installation
 
@@ -22,23 +19,22 @@ npm install condilation
 # Usage
 
 ````bash
-condilation [input] [output] [locals...]
+  Usage: condilation <input> <output>
+
+  Options:
+
+    -h, --help     output usage information
+    -V, --version  output the version number
+    -f, --force    forces overwrite of output file
+
+  Examples:
+
+    $     env=cjs condilation common.js cjs.js
+    $  env=meteor condilation common.js meteor.js
+    $ env=globals condilation common.js globals.js
 ````
 
-  * **Input** `(required)`: Input file path
-  * **Output** `(required)`: Output file path
-  * **Locals** `(optional)`: Variables to access in your conditions
-    * Default to `process.env`
-
-## Examples
-
-````bash
-$ condilation input.js output.js env=cjs
-$ condilation input.js output.js env=cjs coverage=yes
-$ condilation input.js output.js env=cjs coverage=yes variable=value etc=xyz
-````
-
-# Directives
+## Directives
 
 There's 4 conditional directives available:
 
@@ -47,7 +43,7 @@ There's 4 conditional directives available:
   * `condilation:else`
   * `condilation:fi`
 
-# Comparison
+## Comparison
 
 You can use both equality and inequality operators:
 
@@ -60,19 +56,18 @@ var inequality = 'is not browser';
 ````
 
 
-# Instructions
+## Instrumenting
 
 In this example, we have a javascript file which we want to use in:
   - `commonjs`
   - `globals`
   - `meteor`
 
-So, first we need to instruct our text files.
+So, first we need to instrument it:
 
+> __*sample.js*__
 
 ````javascript
-/* mymodule.js */
-
 // condilation:if env=cjs
 module.exports
 // condilation:elif env=meteor
@@ -86,42 +81,71 @@ window.MyModule;
 }
 ````
 
-> Note that **comments** are used, so the original functionality doesn't get
-modified whatsoever.
+> Note that **comments** are used so the original functionality doesn't get
+modified whatsoever. You can do the same for the text file you're dealing with.
 
-# Compiling
+In the next step we'll see how we send the `env` value so our conditionals
+can work properly.
 
-Now lets see our output for three different cases:
+## Compiling
 
-## #1 env=cjs
+In order to compile we need to set our `variables` accordingly, as we expect
+them. In this example, we're checking conditions against the `env` variable. So
+we set it right before the `condilation` call.
+
+Lets see three examples and their corresponding outputs:
 
 ````javascript
-// $ condilation mymodule.js cjs/mymodule.js env=cjs
+// $ env=cjs condilation sample.js cjs.js
 module.exports
 = function(){
   console.log('Hello World');
 }
 ````
 
-## #2 env=meteor
-
 ````javascript
-// $ condilation mymodule.js meteor/mymodule.js env=meteor
+// $ env=meteor condilation sample.js meteor.js
 MyModule
 = function(){
   console.log('Hello World');
 }
 ````
 
-## #3 env=meteor
-
 ````javascript
-// $ condilation mymodule.js mymodule.js env=globals
+// $ env=globals condilation sample.js globals.js
 window.MyModule
 = function(){
   console.log('Hello World');
 }
 ````
+
+# Programatic API
+
+Signature is such as follows:
+
+````php
+condilation(<input>, <output>, {locals}, {options});
+
+/*
+    input - input file path
+   output - output file path
+   locals - variables accessible to instrumented code
+  options - same as CLI options
+ */
+````
+
+Practical example:
+
+````javascript
+var condilation = require('condilation');
+
+condilation('source.js', 'cjs.js', {env: 'cjs'}, {force: true});
+````
+
+1. > Note that in the CLI mode our variables (`locals`) gets read from
+`process.env` but in the Javascript mode, we need to explicitly set them.
+
+1. > The options are the same of the CLI, but informed without alias or dashes.
 
 # License
 
