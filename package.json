@@ -1,7 +1,8 @@
 {
   "name": "condilation",
   "version": "1.0.0",
-  "description": "Conditional build for text files (builditional)",
+  "description": "Conditional build tool for text files",
+  "author": "Anderson Arboleya <anderson@arboleya.me>",
   "main": "index.js",
   "bin": "bin",
   "directories": {
@@ -21,7 +22,6 @@
     "files",
     "build"
   ],
-  "author": "Anderson Arboleya <anderson@arboleya.me>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/arboleya/condilation/issues"
