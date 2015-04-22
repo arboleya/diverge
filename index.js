@@ -57,7 +57,7 @@ function parse_conditional_block(block, locals){
 
       continue;
     }
-    
+
     // else
     else if(/condilation:else/.test(line)){
       capturing = passed === 0;

@@ -43,16 +43,16 @@ function condilationize(input, output){
   }
 
   output = path.resolve(output);
-  
+
   if(fs.existsSync(output) && !program.force){
-    
+
     var msg = 'Output file exists:\n\t:: ' + output;
     msg += '\n\nDo you want to overwrite it? [N/y] : ';
-    
+
     prompt(msg, function(answer){
       if(/y|yes/i.test(answer))
         action(input, output);
-      else 
+      else
         process.exit();
     });
 
@@ -64,7 +64,7 @@ function condilationize(input, output){
 function prompt(question, done){
   var stdin = process.stdin;
   var stdout = process.stdout;
-  
+
   stdout.write(question);
   stdin.once( 'data', function(data){
     done(data.toString().trim());

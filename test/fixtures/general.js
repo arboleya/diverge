@@ -1,7 +1,7 @@
 // condilation:if env=cjs
-module.exports = 
+module.exports =
 // condilation:elif env!=globals
-MyModule = 
+MyModule =
 // condilation:else
 window.MyModule =
 // condilation:fi
