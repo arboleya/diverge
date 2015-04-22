@@ -15,7 +15,7 @@ function writefile(filepath, contents){
 module.exports = function(input, output, locals){
   var buffer = [];
   var source = readfile(input);
-  var reg = /^.+condilation:if([\s\S]+?)condilation:fi.*$/gm;
+  var reg = /^.+diverge:if([\s\S]+?)diverge:fi.*$/gm;
 
   while ((res = reg.exec(source))){
     var before = res[0];
@@ -40,7 +40,7 @@ function parse_conditional_block(block, locals){
     line = lines[i];
 
     // if, elif
-    if(/condilation:(if|elif)/.test(line)) {
+    if(/diverge:(if|elif)/.test(line)) {
       var cond = line.match(/(\w+)\s*(\!?=)\s*(\w+)/);
       var cond_parts = cond.slice(1);
 
@@ -59,13 +59,13 @@ function parse_conditional_block(block, locals){
     }
 
     // else
-    else if(/condilation:else/.test(line)){
+    else if(/diverge:else/.test(line)){
       capturing = passed === 0;
       continue;
     }
 
     // fi
-    // else if(/condilation:fi/.test(line))
+    // else if(/diverge:fi/.test(line))
     //   return buffer;
 
     // capturing lines

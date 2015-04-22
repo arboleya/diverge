@@ -1,6 +1,6 @@
 var path        = require('path');
 var should      = require('chai').should();
-var condilation = require('..');
+var diverge = require('..');
 
 
 var fixture = path.join(__dirname, 'fixtures', 'general.js');
@@ -12,9 +12,9 @@ var globals = path.join(__dirname, 'fixtures', 'globals.js');
 
 describe('[general]', function(){
   it('should properly condional-compile files', function(){
-    condilation(fixture, cjs, {env: 'cjs'});
-    condilation(fixture, meteor, {env: 'meteor'});
-    condilation(fixture, globals, {env: 'globals'});
+    diverge(fixture, cjs, {env: 'cjs'});
+    diverge(fixture, meteor, {env: 'meteor'});
+    diverge(fixture, globals, {env: 'globals'});
 
     // fakes global window
     window = {};
@@ -30,8 +30,8 @@ describe('[general]', function(){
     should.exist(window.MyModule);
 
     // and all should work as expected
-    mod().should.be.equal('condilation');
-    MyModule().should.be.equal('condilation');
-    window.MyModule().should.be.equal('condilation');
+    mod().should.be.equal('diverge');
+    MyModule().should.be.equal('diverge');
+    window.MyModule().should.be.equal('diverge');
   });
 });

@@ -3,7 +3,7 @@
 // modules
 var fs = require('fs');
 var path = require('path');
-var condilation = require('..');
+var diverge = require('..');
 var program = require('commander');
 
 // cli interface
@@ -11,14 +11,14 @@ program
   .version(require('../package.json').version)
   .usage('<input> <output>')
   .arguments('[input] <output>')
-  .action(condilationize)
+  .action(divergeize)
   .option('-f, --force', 'forces overwrite of output file')
   .on('--help', function(){
     console.log('  Examples:');
     console.log('');
-    console.log('    $     env=cjs condilation common.js cjs.js');
-    console.log('    $  env=meteor condilation common.js meteor.js');
-    console.log('    $ env=globals condilation common.js globals.js');
+    console.log('    $     env=cjs diverge common.js cjs.js');
+    console.log('    $  env=meteor diverge common.js meteor.js');
+    console.log('    $ env=globals diverge common.js globals.js');
     console.log('');
   })
   .parse(process.argv);
@@ -29,7 +29,7 @@ if(!process.argv.slice(2).length){
 }
 
  // process user input
-function condilationize(input, output){
+function divergeize(input, output){
   // validation of input
   if(!input){
     console.log('Input file not informed');
@@ -73,6 +73,6 @@ function prompt(question, done){
 
 // conditional compile user file accordingly
 function action(input, output){
-  condilation(input, output, null, {force: program.force});
+  diverge(input, output, null, {force: program.force});
   process.exit();
 }

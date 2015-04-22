@@ -1,5 +1,5 @@
 {
-  "name": "condilation",
+  "name": "diverge",
   "version": "1.0.0",
   "description": "Conditional build tool for text files",
   "author": "Anderson Arboleya <anderson@arboleya.me>",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/arboleya/condilation"
+    "url": "git://github.com/arboleya/diverge"
   },
   "keywords": [
     "conditional",
@@ -24,9 +24,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/arboleya/condilation/issues"
+    "url": "https://github.com/arboleya/diverge/issues"
   },
-  "homepage": "https://github.com/arboleya/condilation",
+  "homepage": "https://github.com/arboleya/diverge",
   "devDependencies": {
     "chai": "^2.2.0",
     "codeclimate-test-reporter": "0.0.4",

@@ -1,4 +1,4 @@
-# Condilation
+# Diverge
 
 Dead simple conditional build tool for text files.
 
@@ -13,13 +13,13 @@ Dead simple conditional build tool for text files.
 # Installation
 
 ````
-npm install condilation
+npm install diverge
 ````
 
 # Usage
 
 ````bash
-  Usage: condilation <input> <output>
+  Usage: diverge <input> <output>
 
   Options:
 
@@ -29,30 +29,30 @@ npm install condilation
 
   Examples:
 
-    $     env=cjs condilation common.js cjs.js
-    $  env=meteor condilation common.js meteor.js
-    $ env=globals condilation common.js globals.js
+    $     env=cjs diverge common.js cjs.js
+    $  env=meteor diverge common.js meteor.js
+    $ env=globals diverge common.js globals.js
 ````
 
 ## Directives
 
 There's 4 conditional directives available:
 
-  * `condilation:if`
-  * `condilation:elif`
-  * `condilation:else`
-  * `condilation:fi`
+  * `diverge:if`
+  * `diverge:elif`
+  * `diverge:else`
+  * `diverge:fi`
 
 ## Comparison
 
 You can use both equality and inequality operators:
 
 ````javascript
-// condilation:if env=browser
+// diverge:if env=browser
 var equality = 'is browser';
-// condilation:elif env!=browser
+// diverge:elif env!=browser
 var inequality = 'is not browser';
-// condilation:fi
+// diverge:fi
 ````
 
 
@@ -68,13 +68,13 @@ So, first we need to instrument it:
 > __*sample.js*__
 
 ````javascript
-// condilation:if env=cjs
+// diverge:if env=cjs
 module.exports
-// condilation:elif env=meteor
+// diverge:elif env=meteor
 MyModule
-// condilation:else
+// diverge:else
 window.MyModule;
-// condilation:fi
+// diverge:fi
 
 = function(){
   console.log('Hello World');
@@ -91,12 +91,12 @@ can work properly.
 
 In order to compile we need to set our `variables` accordingly, as we expect
 them. In this example, we're checking conditions against the `env` variable. So
-we set it right before the `condilation` call.
+we set it right before the `diverge` call.
 
 Lets see three examples and their corresponding outputs:
 
 ````javascript
-// $ env=cjs condilation sample.js cjs.js
+// $ env=cjs diverge sample.js cjs.js
 module.exports
 = function(){
   console.log('Hello World');
@@ -104,7 +104,7 @@ module.exports
 ````
 
 ````javascript
-// $ env=meteor condilation sample.js meteor.js
+// $ env=meteor diverge sample.js meteor.js
 MyModule
 = function(){
   console.log('Hello World');
@@ -112,7 +112,7 @@ MyModule
 ````
 
 ````javascript
-// $ env=globals condilation sample.js globals.js
+// $ env=globals diverge sample.js globals.js
 window.MyModule
 = function(){
   console.log('Hello World');
@@ -124,7 +124,7 @@ window.MyModule
 Signature is such as follows:
 
 ````php
-condilation(<input>, <output>, {locals}, {options});
+diverge(<input>, <output>, {locals}, {options});
 
 /*
     input - input file path
@@ -137,9 +137,9 @@ condilation(<input>, <output>, {locals}, {options});
 Practical example:
 
 ````javascript
-var condilation = require('condilation');
+var diverge = require('diverge');
 
-condilation('source.js', 'cjs.js', {env: 'cjs'}, {force: true});
+diverge('source.js', 'cjs.js', {env: 'cjs'}, {force: true});
 ````
 
 1. > Note that in the CLI mode our variables (`locals`) gets read from

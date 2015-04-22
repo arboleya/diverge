@@ -1,11 +1,11 @@
-// condilation:if env=cjs
+// diverge:if env=cjs
 module.exports =
-// condilation:elif env!=globals
+// diverge:elif env!=globals
 MyModule =
-// condilation:else
+// diverge:else
 window.MyModule =
-// condilation:fi
+// diverge:fi
 
 function(){
-  return 'condilation';
+  return 'diverge';
 };
