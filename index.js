@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 
+module.exports = diverge;
 
 function readfile(filepath){
   return fs.readFileSync(path.resolve(filepath), 'utf-8');
@@ -12,7 +13,7 @@ function writefile(filepath, contents){
 }
 
 
-module.exports = function(input, output, locals){
+function diverge(input, output, locals){
   var buffer = [];
   var source = readfile(input);
   var reg = /^.+diverge:if([\s\S]+?)diverge:fi.*$/gm;
@@ -65,14 +66,13 @@ function parse_conditional_block(block, locals){
     }
 
     // fi
-    // else if(/diverge:fi/.test(line))
-    //   return buffer;
+    else if(/diverge:fi/.test(line)){
+      return buffer;
+    }
 
     // capturing lines
     else if(capturing){
       buffer += line + '\n';
     }
   }
-
-  return buffer;
 }
