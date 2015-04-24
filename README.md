@@ -1,6 +1,11 @@
+[![Build Status](https://travis-ci.org/arboleya/diverge.svg?branch=master)](https://travis-ci.org/arboleya/diverge)
+[![Coverage Status](https://coveralls.io/repos/arboleya/diverge/badge.svg?branch=master)](https://coveralls.io/r/arboleya/diverge?branch=master)
+[![Code Climate](https://codeclimate.com/github/arboleya/diverge/badges/gpa.svg)](https://codeclimate.com/github/arboleya/diverge)
+[![Dependency Status](https://gemnasium.com/arboleya/diverge.png)](https://gemnasium.com/arboleya/diverge)
+
 # Diverge
 
-Dead simple conditional build tool for text files.
+Dead simple conditional build tool.
 
 - [Installation](#installation)
 - [Usage](#usage)
