@@ -11,7 +11,7 @@ Dead simple conditional build tool.
 - [Usage](#usage)
   - [Directives](#directives)
   - [Comparison](#comparison)
-  - [Instrumenting](#instructions)
+  - [Instrumenting](#instrumenting)
   - [Compiling](#compiling)
 - [API](#programatic-api)
 
