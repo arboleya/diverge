@@ -1,0 +1,19 @@
+env:
+  global:
+    # COVERALLS_REPO_TOKEN
+    - secure: "HfOdYeg+b0UdAt6UcN1rDTomq5/LUm1VYxJzNhSmpyTDNCtroqhzudN7tXc/1ffdJc8LXbuRlKYSFcz/6neSAg56hUvJ9r7NcUzcilZ45osL6tbI32VpYkkZqPBGIW/D6KlBLcmZj9WUilhTV0VtDRT3PRGWjNH19SFhckarx4c="
+
+    # CODECLIMATE_REPO_TOKEN
+    - secure: "gQpaTEAZmAdzA2tL0XXaCYiAkpL45cCg/eWZLHho/81R95hiTDP7lyjVN2fANm5hD8Z+hz0g3BdxEMdHutUAIBn44aRFC1etLPH+/SQqKqJkgfF6JDq52hwbL9dcVpHN1Vzl3R1cZg8u3/3wUzFjfvycbInQwDqnGXoetO6kv2U="
+
+language: node_js
+
+node_js:
+  - iojs
+  - 0.12
+
+install:
+  - npm install
+
+script:
+  - make test.coverage.coveralls
