@@ -145,7 +145,7 @@ diverge('source.js', 'cjs.js', {env: 'cjs'}, {force: true});
 1. > Note that in the CLI mode our variables (`locals`) gets read from
 `process.env` but in the Javascript mode, we need to explicitly set them.
 
-1. > The options are the same of the CLI, but informed without alias or dashes.
+1. > The options are the same of the CLI, but informed without aliases / dashes.
 
 # License
 
