@@ -1,10 +1,10 @@
 {
   "name": "diverge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Conditional build tool for text files",
   "author": "Anderson Arboleya <anderson@arboleya.me>",
   "main": "index.js",
-  "bin": "bin",
+  "bin": "bin/diverge",
   "directories": {
     "test": "test"
   },
