@@ -73,6 +73,6 @@ function prompt(question, done){
 
 // conditional compile user file accordingly
 function action(input, output){
-  diverge(input, output, null, {force: program.force});
+  diverge(input, output, process.env, {force: program.force});
   process.exit();
 }
