@@ -1,6 +1,6 @@
 {
   "name": "diverge",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Conditional build tool for text files",
   "author": "Anderson Arboleya <anderson@arboleya.me>",
   "main": "index.js",
